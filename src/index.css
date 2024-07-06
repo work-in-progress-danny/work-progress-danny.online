@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Ga Maamli";
+  src: local("Ga Maamli"),
+    url('./assets/fonts/Ga Maamli/GaMaamli-Regular.ttf')
+}
+
+@font-face {
+  font-family: "Gamja Flower";
+  src: local("Gamja Flower"),
+    url('./assets/fonts/Gamja Flower/GamjaFlower-Regular.ttf')
+}
+
+@font-face {
+  font-family: "Koulen";
+  src: local("Koulen"),
+    url('./assets/fonts/Koulen/Koulen-Regular.ttf')
+}
+
+.body {
+  font-family: "Gamja Flower";
+  font-size: 22px;
+}
+
+.font-body {
+  font-family: "Gamja Flower";
+}
+
+.title {
+  font-family: "Koulen";
+}
+
+body {
+  background-color: #D9D9D9;
+}
