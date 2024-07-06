@@ -30,11 +30,12 @@ export const SlideshowIndicator = ({
 	currentSlide,
 	slidesCount,
 }: { slidesCount: number; currentSlide: number }) => {
-	const [slides] = useState(new Array(slidesCount).fill(null));
+	const slides = new Array(slidesCount).fill(null);
+	console.log(slidesCount);
 	return (
 		<div className="flex w-fit h-4 sm:h-6 self-center">
 			{slides.map((_, i) =>
-				i === currentSlide ? (
+				i + 1 === currentSlide ? (
 					<CurrentSlideIcon key={i} />
 				) : (
 					<SlideIcon key={i} />
