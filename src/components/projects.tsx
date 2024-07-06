@@ -19,13 +19,7 @@ const projects: Project[] = [
 	},
 ];
 
-const Project = ({
-	title,
-	description,
-	recordingSrc,
-	createdAt,
-	lastUpdatedAt,
-}: Project) => {
+const Project = ({ title, description, createdAt, lastUpdatedAt }: Project) => {
 	return (
 		<div className="w-full flex flex-col gap-5 sm:gap-0 sm:flex-row justify-between">
 			<div className="flex flex-col gap-5 sm:gap-0 sm:justify-between">
