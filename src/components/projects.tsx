@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import { SlideshowIndicator } from "./slideshowIndicator";
-import Autoplay from "embla-carousel-autoplay";
+import Autoplay from "embla-carousel-autoplay"
+import { useEffect, useState } from "react"
+import { SlideshowIndicator } from "./slideshowIndicator"
 
 import {
 	Carousel,
-	CarouselApi,
+	type CarouselApi,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-} from "./ui/carousel";
+} from "./ui/carousel"
 
 type Project = {
-	title: string;
-	description: string;
-	recordingSrc: string;
-	createdAt: string;
-	lastUpdatedAt: string;
-};
+	title: string
+	description: string
+	recordingSrc: string
+	createdAt: string
+	lastUpdatedAt: string
+}
 
 const projects: Project[] = [
 	{
@@ -36,7 +36,7 @@ const projects: Project[] = [
 		lastUpdatedAt: "Apr 3, 2024",
 		recordingSrc: "https://www.youtube.com/embed/1",
 	},
-];
+]
 
 const Project = ({ title, description, createdAt, lastUpdatedAt }: Project) => {
 	return (
@@ -57,26 +57,26 @@ const Project = ({ title, description, createdAt, lastUpdatedAt }: Project) => {
 				className="sm:w-2/3 rounded border border-black p-1"
 			/>
 		</CarouselItem>
-	);
-};
+	)
+}
 
 export const Projects = () => {
-	const [api, setApi] = useState<CarouselApi>();
-	const [current, setCurrent] = useState(0);
-	const [count, setCount] = useState(0);
+	const [api, setApi] = useState<CarouselApi>()
+	const [current, setCurrent] = useState(0)
+	const [count, setCount] = useState(0)
 
 	useEffect(() => {
 		if (!api) {
-			return;
+			return
 		}
 
-		setCount(api.scrollSnapList().length);
-		setCurrent(api.selectedScrollSnap() + 1);
+		setCount(api.scrollSnapList().length)
+		setCurrent(api.selectedScrollSnap() + 1)
 
 		api.on("select", () => {
-			setCurrent(api.selectedScrollSnap() + 1);
-		});
-	}, [api]);
+			setCurrent(api.selectedScrollSnap() + 1)
+		})
+	}, [api])
 
 	return (
 		<Carousel
@@ -102,5 +102,5 @@ export const Projects = () => {
 				</div>
 			</div>
 		</Carousel>
-	);
-};
+	)
+}

@@ -1,4 +1,4 @@
-import { Socials } from "../components/socials";
+import { Socials } from "../components/socials"
 
 export const Intro = () => (
 	<div className="flex flex-col w-full">
@@ -11,4 +11,4 @@ export const Intro = () => (
 			<img src="/danny.png" alt="placeholder" className="sm:h-96 rounded" />
 		</div>
 	</div>
-);
+)
