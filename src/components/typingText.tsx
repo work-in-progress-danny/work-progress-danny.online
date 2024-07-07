@@ -1,0 +1,55 @@
+import { useContext, useEffect, useState } from "react"
+import { cn } from "../lib/utils"
+import { CurrentlyTypingIndexContext } from "../App"
+
+const Cursor = ({ blink }: { blink?: boolean }) => (
+	<span
+		style={{ fontFamily: "default" }}
+		className={cn(blink && "animate-blink", "font-normal")}
+	>
+		{" |"}
+	</span>
+)
+
+/** TypingText component that types out the given text */
+export const TypingText = ({
+	text,
+	typingQueuePosition,
+}: { text: string; typingQueuePosition: number }) => {
+	const [currentText, setCurrentText] = useState("")
+	const [blink, setBlink] = useState(false)
+	const { typingIndex, incrementTypingIndex } = useContext(
+		CurrentlyTypingIndexContext,
+	)
+	const isTyping = typingQueuePosition === typingIndex
+
+	useEffect(() => {
+		if (typingQueuePosition !== typingIndex) return
+		const interval = setInterval(() => {
+			setCurrentText((prev) => prev + text[prev.length])
+		}, 75)
+
+		if (currentText.length === text.length) {
+			clearInterval(interval)
+			setBlink(true)
+			setTimeout(() => {
+				incrementTypingIndex()
+			}, 2000)
+		}
+
+		return () => clearInterval(interval)
+	}, [
+		currentText,
+		text,
+		typingIndex,
+		typingQueuePosition,
+		incrementTypingIndex,
+	])
+
+	return (
+		<span>
+			{currentText}
+			{isTyping && <Cursor blink={blink} />}
+		</span>
+	)
+}

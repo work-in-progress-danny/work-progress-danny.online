@@ -1,15 +1,14 @@
 import Autoplay from "embla-carousel-autoplay"
 import { useEffect, useState } from "react"
 import { SlideshowIndicator } from "./slideshowIndicator"
-
 import {
 	Carousel,
-	type CarouselApi,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
 } from "./ui/carousel"
+import type { CarouselApi } from "./ui/carousel"
 
 type Project = {
 	title: string
