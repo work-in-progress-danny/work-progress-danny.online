@@ -17,10 +17,12 @@ const App = () => {
 		<CurrentlyTypingIndexContext.Provider
 			value={{ typingIndex, incrementTypingIndex }}
 		>
-			<div className="p-1 flex flex-col gap-10 items-center md:gap-24 md:p-5">
-				<Intro />
-				<InProgress />
-				<Footer />
+			<div className="w-full flex justify-center">
+				<div className="p-1 flex flex-col gap-10 items-center md:gap-24 md:p-5 w-full max-w-[1920px]">
+					<Intro />
+					<InProgress />
+					<Footer />
+				</div>
 			</div>
 		</CurrentlyTypingIndexContext.Provider>
 	)

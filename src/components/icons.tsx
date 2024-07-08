@@ -6,7 +6,7 @@ const basicIconProps = {
 	width: "100%",
 	fill: "currentColor",
 	xmlns: "http://www.w3.org/2000/svg",
-	className: "w-8",
+	className: "w-8 md:w-10",
 }
 
 export const XIcon = () => (
