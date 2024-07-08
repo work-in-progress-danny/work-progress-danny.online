@@ -29,19 +29,15 @@ const Dates = ({
 }: { createdAt: string; lastUpdatedAt: string }) => {
 	return (
 		<div>
-			<p className="body font-bold">
-				Created: <span className="body font-normal">{createdAt}</span>
-			</p>
-			<p className="body font-bold">
-				Last Updated: <span className="body font-normal">{lastUpdatedAt}</span>
-			</p>
+			<p className="body">Created: {createdAt}</p>
+			<p className="body">Last Updated: {lastUpdatedAt}</p>
 		</div>
 	)
 }
 
 const Title = ({ title }: { title: string }) => {
 	return (
-		<h3 className="title text-3xl underline">
+		<h3 className="title text-3xl underline w-full break-words">
 			<TypingText text={title} typingQueuePosition={3} />
 		</h3>
 	)
@@ -49,7 +45,7 @@ const Title = ({ title }: { title: string }) => {
 
 const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
 	return (
-		<div className="flex gap-2 h-8">
+		<div className="flex gap-2 h-10">
 			{links.map(({ href, icon: iconName }) => {
 				let icon: ReactNode
 
@@ -99,7 +95,7 @@ export const Project = ({
 	return (
 		<div className="flex flex-col gap-5 md:flex-row justify-between">
 			<div className="flex flex-col gap-5 flex-1">
-				<div className="flex flex-col gap-2">
+				<div className="flex flex-col gap-2 justify-start items-start">
 					<Title title={title} />
 					<LinkGroup links={links} />
 					<Dates createdAt={createdAt} lastUpdatedAt={lastUpdatedAt} />
