@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 import { TypingText } from "../typingText"
 import {
 	BambuLabIcon,
@@ -7,6 +7,8 @@ import {
 	SpotifyIcon,
 	SubstackIcon,
 } from "../icons"
+import { useAnimationList } from "../../lib/AnimationQueue"
+import { cn } from "../../lib/utils"
 
 export type ProjectLink = {
 	href: string
@@ -27,26 +29,86 @@ const Dates = ({
 	createdAt,
 	lastUpdatedAt,
 }: { createdAt: string; lastUpdatedAt: string }) => {
+	const createdAtHandlers = useAnimationList(`project title ${createdAt}`)
+	const lastUpdatedAtHandler = useAnimationList(
+		`project title ${lastUpdatedAt}`,
+	)
+
+	useEffect(() => {
+		createdAtHandlers.addSelfToAnimationList()
+		lastUpdatedAtHandler.addSelfToAnimationList()
+	}, [lastUpdatedAtHandler, createdAtHandlers])
+
 	return (
 		<div>
-			<p className="body">Created: {createdAt}</p>
-			<p className="body">Last Updated: {lastUpdatedAt}</p>
+			<p className="body">
+				<TypingText
+					isFinished={createdAtHandlers.isFinished()}
+					text={`Created: ${createdAt}`}
+					onFinish={() => createdAtHandlers.onFinish()}
+					startTyping={createdAtHandlers.isAnimating()}
+				/>
+			</p>
+
+			<p className="body">
+				<TypingText
+					isFinished={lastUpdatedAtHandler.isFinished()}
+					text={`Last Updated: ${lastUpdatedAt}`}
+					onFinish={() => lastUpdatedAtHandler.onFinish()}
+					startTyping={lastUpdatedAtHandler.isAnimating()}
+				/>
+			</p>
 		</div>
 	)
 }
 
 const Title = ({ title }: { title: string }) => {
+	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
+		useAnimationList(`project title ${title}`)
+
+	useEffect(() => {
+		addSelfToAnimationList()
+	}, [addSelfToAnimationList])
+
 	return (
 		<h3 className="title text-3xl underline w-full break-words">
-			<TypingText text={title} typingQueuePosition={3} />
+			<TypingText
+				isFinished={isFinished()}
+				text={title}
+				onFinish={() => onFinish()}
+				startTyping={isAnimating()}
+			/>
 		</h3>
 	)
 }
 
 const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
+	const { addSelfToAnimationList, onFinish, isAnimating } = useAnimationList(
+		`project links ${links[0].href}`,
+	)
+
+	const [visibleIcons, setVisibleIcons] = useState(0)
+
+	useEffect(() => {
+		addSelfToAnimationList()
+	}, [addSelfToAnimationList])
+
+	useEffect(() => {
+		if (!isAnimating()) return
+		const interval = setInterval(() => {
+			setVisibleIcons(visibleIcons + 1)
+		}, 500)
+
+		if (visibleIcons === links.length) {
+			clearInterval(interval)
+			onFinish()
+		}
+		return () => clearInterval(interval)
+	}, [isAnimating, visibleIcons, onFinish, links.length])
+
 	return (
 		<div className="flex gap-2 h-10">
-			{links.map(({ href, icon: iconName }) => {
+			{links.map(({ href, icon: iconName }, index) => {
 				let icon: ReactNode
 
 				switch (iconName) {
@@ -71,7 +133,11 @@ const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
 
 				return (
 					// TODO make this accessible
-					<a key={href} href={href}>
+					<a
+						key={href}
+						href={href}
+						className={cn(visibleIcons > index ? "visible" : "hidden")}
+					>
 						{icon}
 					</a>
 				)
@@ -81,7 +147,54 @@ const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
 }
 
 const Body = ({ body }: { body: string }) => {
-	return <p className="body">{body}</p>
+	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
+		useAnimationList(`project title ${body}`)
+
+	useEffect(() => {
+		addSelfToAnimationList()
+	}, [addSelfToAnimationList])
+
+	return (
+		<p className="body">
+			<TypingText
+				isFinished={isFinished()}
+				text={body}
+				onFinish={() => onFinish()}
+				startTyping={isAnimating()}
+			/>
+		</p>
+	)
+}
+
+const VisualContent = ({
+	visualContent,
+	title,
+}: { visualContent: ReactNode; title: string }) => {
+	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
+		useAnimationList(`project title image ${title}`)
+
+	useEffect(() => {
+		addSelfToAnimationList()
+	}, [addSelfToAnimationList])
+
+	useEffect(() => {
+		if (!isAnimating()) return
+
+		setTimeout(() => {
+			onFinish()
+		}, 500)
+	}, [isAnimating, onFinish])
+
+	return (
+		<div
+			className={cn(
+				"w-full md:w-1/2 flex-1 flex justify-end",
+				isFinished() ? "visible" : "hidden",
+			)}
+		>
+			{visualContent}
+		</div>
+	)
 }
 
 export const Project = ({
@@ -102,9 +215,7 @@ export const Project = ({
 				</div>
 				<Body body={description} />
 			</div>
-			<div className="w-full md:w-1/2 flex-1 flex justify-end">
-				{visualContent}
-			</div>
+			<VisualContent visualContent={visualContent} title={title} />
 		</div>
 	)
 }

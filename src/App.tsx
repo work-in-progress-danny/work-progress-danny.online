@@ -1,22 +1,11 @@
-import { createContext, useState } from "react"
 import { InProgress } from "./sections/InProgress"
 import { Intro } from "./sections/Intro"
 import { Footer } from "./sections/Footer"
-
-export const CurrentlyTypingIndexContext = createContext<{
-	typingIndex: number
-	incrementTypingIndex: () => void
-	// @ts-ignore: the value is set in the App component
-}>(null)
+import { AnimationListProvider } from "./lib/AnimationList"
 
 const App = () => {
-	const [typingIndex, setTypingIndex] = useState(0)
-	const incrementTypingIndex = () => setTypingIndex(typingIndex + 1)
-
 	return (
-		<CurrentlyTypingIndexContext.Provider
-			value={{ typingIndex, incrementTypingIndex }}
-		>
+		<AnimationListProvider>
 			<div className="w-full flex justify-center">
 				<div className="p-1 flex flex-col gap-10 items-center md:gap-24 md:p-5 w-full max-w-[1920px]">
 					<Intro />
@@ -24,7 +13,7 @@ const App = () => {
 					<Footer />
 				</div>
 			</div>
-		</CurrentlyTypingIndexContext.Provider>
+		</AnimationListProvider>
 	)
 }
 

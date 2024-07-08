@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { cn } from "../lib/utils"
-import { CurrentlyTypingIndexContext } from "../App"
 
 const Cursor = ({ blink }: { blink?: boolean }) => (
 	<span
@@ -14,18 +13,22 @@ const Cursor = ({ blink }: { blink?: boolean }) => (
 /** TypingText component that types out the given text */
 export const TypingText = ({
 	text,
-	typingQueuePosition,
-	onFinished,
-}: { text: string; typingQueuePosition: number; onFinished?: () => void }) => {
+	startTyping,
+	onFinish,
+	isFinished,
+}: {
+	text: string
+	startTyping: boolean
+	onFinish: () => void
+	isFinished: boolean
+}) => {
 	const [currentText, setCurrentText] = useState("")
 	const [blink, setBlink] = useState(false)
-	const { typingIndex, incrementTypingIndex } = useContext(
-		CurrentlyTypingIndexContext,
-	)
-	const isTyping = typingQueuePosition === typingIndex
+	const [isTyping, setIsTyping] = useState(false)
 
 	useEffect(() => {
-		if (typingQueuePosition !== typingIndex) return
+		if (!startTyping) return
+		setIsTyping(true)
 		const interval = setInterval(() => {
 			setCurrentText((prev) => prev + text[prev.length])
 		}, 75)
@@ -34,24 +37,17 @@ export const TypingText = ({
 			clearInterval(interval)
 			setBlink(true)
 			setTimeout(() => {
-				incrementTypingIndex()
-				onFinished?.()
+				setIsTyping(false)
+				onFinish()
 			}, 2000)
 		}
 
 		return () => clearInterval(interval)
-	}, [
-		currentText,
-		text,
-		typingIndex,
-		typingQueuePosition,
-		incrementTypingIndex,
-		onFinished,
-	])
+	}, [currentText, text, startTyping, onFinish])
 
 	return (
 		<span>
-			{text}
+			{isFinished ? text : currentText}
 			{isTyping && <Cursor blink={blink} />}
 		</span>
 	)
