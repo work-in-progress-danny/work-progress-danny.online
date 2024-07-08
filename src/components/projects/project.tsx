@@ -41,7 +41,7 @@ const Dates = ({
 
 const Title = ({ title }: { title: string }) => {
 	return (
-		<h3 className="title text-3xl">
+		<h3 className="title text-3xl underline">
 			<TypingText text={title} typingQueuePosition={3} />
 		</h3>
 	)
@@ -97,7 +97,7 @@ export const Project = ({
 	visualContent,
 }: ProjectType) => {
 	return (
-		<div className="flex flex-col gap-5 sm:flex-row justify-between">
+		<div className="flex flex-col gap-5 md:flex-row justify-between">
 			<div className="flex flex-col gap-5 flex-1">
 				<div className="flex flex-col gap-2">
 					<Title title={title} />
@@ -106,7 +106,9 @@ export const Project = ({
 				</div>
 				<Body body={description} />
 			</div>
-			<div className="w-1/2 flex-1 flex justify-end">{visualContent}</div>
+			<div className="w-full md:w-1/2 flex-1 flex justify-end">
+				{visualContent}
+			</div>
 		</div>
 	)
 }

@@ -105,7 +105,7 @@ const projects: ProjectType[] = [
 ]
 
 export const Projects = () => (
-	<div className="flex flex-col gap-56">
+	<div className="flex flex-col gap-5 md:gap-56">
 		{projects.map((project) => (
 			<Project key={project.title} {...project} />
 		))}

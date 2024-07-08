@@ -3,7 +3,7 @@ import { TypingText } from "../components/typingText"
 
 const Heading = () => {
 	return (
-		<h1 className="title text-4xl sm:text-6xl">
+		<h1 className="title text-5xl self-center md:text-6xl">
 			<TypingText text="WORK IN PROGRESS DANNY" typingQueuePosition={0} />
 		</h1>
 	)
@@ -31,8 +31,8 @@ const IntroText = () => {
 }
 export const Intro = () => {
 	return (
-		<div className="w-full flex justify-between">
-			<div className="flex flex-col justify-between">
+		<div className="w-full flex flex-col gap-5 md:gap-0 md:flex-row justify-between">
+			<div className="flex flex-col gap-5 md:gap-0 justify-between">
 				<Heading />
 				<IntroText />
 				<Socials />

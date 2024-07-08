@@ -2,7 +2,7 @@ import { GitHubIcon, SpotifyIcon, SubstackIcon, XIcon } from "./icons"
 
 export const Socials = () => {
 	return (
-		<div className="flex gap-8  h-10">
+		<div className="flex justify-between h-8 md:gap-8 md:h-10">
 			<a href="https://github.com/work-in-progress-danny/">
 				<GitHubIcon />
 			</a>
