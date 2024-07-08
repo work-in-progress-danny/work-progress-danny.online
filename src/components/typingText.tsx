@@ -15,7 +15,8 @@ const Cursor = ({ blink }: { blink?: boolean }) => (
 export const TypingText = ({
 	text,
 	typingQueuePosition,
-}: { text: string; typingQueuePosition: number }) => {
+	onFinished,
+}: { text: string; typingQueuePosition: number; onFinished?: () => void }) => {
 	const [currentText, setCurrentText] = useState("")
 	const [blink, setBlink] = useState(false)
 	const { typingIndex, incrementTypingIndex } = useContext(
@@ -34,6 +35,7 @@ export const TypingText = ({
 			setBlink(true)
 			setTimeout(() => {
 				incrementTypingIndex()
+				onFinished?.()
 			}, 2000)
 		}
 
@@ -44,11 +46,12 @@ export const TypingText = ({
 		typingIndex,
 		typingQueuePosition,
 		incrementTypingIndex,
+		onFinished,
 	])
 
 	return (
 		<span>
-			{currentText}
+			{text}
 			{isTyping && <Cursor blink={blink} />}
 		</span>
 	)

@@ -29,7 +29,6 @@ export const SlideshowIndicator = ({
 	slidesCount,
 }: { slidesCount: number; currentSlide: number }) => {
 	const slides = new Array(slidesCount).fill(null)
-	console.log(slidesCount)
 	return (
 		<div className="flex w-fit h-4 sm:h-6 self-center">
 			{slides.map((_, i) =>
