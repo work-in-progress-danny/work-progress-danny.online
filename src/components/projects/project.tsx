@@ -7,7 +7,7 @@ import {
 	SpotifyIcon,
 	SubstackIcon,
 } from "../icons"
-import { useAnimationList } from "../../lib/AnimationQueue"
+import { useAnimationList } from "../../lib/AnimationList"
 import { cn } from "../../lib/utils"
 
 export type ProjectLink = {

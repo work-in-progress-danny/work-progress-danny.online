@@ -1,6 +1,6 @@
 import { TypingText } from "../components/typingText"
 import { Projects } from "../components/projects"
-import { useAnimationList } from "../lib/AnimationQueue"
+import { useAnimationList } from "../lib/AnimationList"
 import { useEffect } from "react"
 
 const Title = () => {

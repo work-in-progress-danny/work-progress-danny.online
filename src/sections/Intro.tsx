@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { TypingText } from "../components/typingText"
-import { useAnimationList } from "../lib/AnimationQueue"
+import { useAnimationList } from "../lib/AnimationList"
 import { cn } from "../lib/utils"
 import { Socials } from "../components/socials"
 

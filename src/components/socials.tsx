@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { GitHubIcon, SpotifyIcon, SubstackIcon, XIcon } from "./icons"
-import { useAnimationList } from "../lib/AnimationQueue"
+import { useAnimationList } from "../lib/AnimationList"
 import { cn } from "../lib/utils"
 
 export const Socials = () => {
