@@ -1,3 +1,28 @@
+//** this function generated the transformation keyframes necessary
+// for a bezier curve dragIn animation */
+//*/
+const generateRandomDragInMovement = (): Record<
+	string,
+	{ transform: string }
+> => {
+	// keyframe 0 is the start and I want it to be 100% x away
+	// keyframe 1 is the first keyframe and the image should be 100 - 1^2.5
+	// keyframe 2
+	const keyframes = {}
+
+	for (let i = 0; i <= 8; i++) {
+		const translatePercentage = 100 - (i ^ 2.5)
+
+		if (!(translatePercentage < 0)) {
+			keyframes[`${i}%`] = {
+				transform: `translateX(${translatePercentage}%) translateY(-${translatePercentage}%)`,
+			}
+		}
+	}
+
+	return keyframes
+}
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	darkMode: ["class"],
@@ -70,14 +95,17 @@ module.exports = {
 					"0%, 100%": { opacity: "0" },
 					"50%": { opacity: "1" },
 				},
+				dragIn: {
+					...generateRandomDragInMovement(),
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 				blink: "blink 1.2s infinite",
+				dragIn: "dragIn 1s ease-out",
 			},
 		},
 	},
 	plugins: [require("tailwindcss-animate")],
-};
-
+}

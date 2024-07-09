@@ -3,6 +3,7 @@ import { TypingText } from "../components/typingText"
 import { useAnimationList } from "../lib/AnimationList"
 import { cn } from "../lib/utils"
 import { Socials } from "../components/socials"
+import { DragItIn } from "../components/dragItIn"
 
 const Heading = () => {
 	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
@@ -24,34 +25,6 @@ const Heading = () => {
 	)
 }
 
-const Portrait = () => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
-		useAnimationList("intro portrait")
-
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
-
-	useEffect(() => {
-		if (!isAnimating()) return
-		setTimeout(() => {
-			console.log("hello")
-			onFinish()
-		}, 500)
-	})
-
-	return (
-		<img
-			src="/danny.png"
-			alt="placeholder"
-			className={cn(
-				isFinished() ? "visible" : "hidden",
-				"rounded-xl max-w-[640px]",
-			)}
-		/>
-	)
-}
-
 const IntroText = () => {
 	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
 		useAnimationList("intro text")
@@ -69,6 +42,14 @@ const IntroText = () => {
 				startTyping={isAnimating()}
 			/>
 		</p>
+	)
+}
+
+const Portrait = () => {
+	return (
+		<DragItIn id="intro Portrait">
+			<img src="/danny.png" alt="placeholder" className="rounded-xl" />
+		</DragItIn>
 	)
 }
 

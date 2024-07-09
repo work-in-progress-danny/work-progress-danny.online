@@ -9,6 +9,7 @@ import {
 } from "../icons"
 import { useAnimationList } from "../../lib/AnimationList"
 import { cn } from "../../lib/utils"
+import { DragItIn } from "../dragItIn"
 
 export type ProjectLink = {
 	href: string
@@ -49,7 +50,6 @@ const Dates = ({
 					startTyping={createdAtHandlers.isAnimating()}
 				/>
 			</p>
-
 			<p className="body">
 				<TypingText
 					isFinished={lastUpdatedAtHandler.isFinished()}
@@ -170,29 +170,9 @@ const VisualContent = ({
 	visualContent,
 	title,
 }: { visualContent: ReactNode; title: string }) => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
-		useAnimationList(`project title image ${title}`)
-
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
-
-	useEffect(() => {
-		if (!isAnimating()) return
-
-		setTimeout(() => {
-			onFinish()
-		}, 500)
-	}, [isAnimating, onFinish])
-
 	return (
-		<div
-			className={cn(
-				"w-full md:w-1/2 flex-1 flex justify-end",
-				isFinished() ? "visible" : "hidden",
-			)}
-		>
-			{visualContent}
+		<div className={"w-full md:w-1/2 flex-1 flex justify-end"}>
+			<DragItIn id={`project title image ${title}`}>{visualContent}</DragItIn>
 		</div>
 	)
 }
