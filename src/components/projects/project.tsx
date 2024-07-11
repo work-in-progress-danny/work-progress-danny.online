@@ -1,15 +1,9 @@
-import { useEffect, useState, type ReactNode } from "react"
-import { TypingText } from "../typingText"
-import {
-	BambuLabIcon,
-	GitHubIcon,
-	LinkIcon,
-	SpotifyIcon,
-	SubstackIcon,
-} from "../icons"
+import { type ReactNode, useEffect, useState } from "react"
 import { useAnimationList } from "../../lib/AnimationList"
 import { cn } from "../../lib/utils"
 import { DragItIn } from "../dragItIn"
+import { BambuLabIcon, GitHubIcon, LinkIcon, SpotifyIcon, SubstackIcon } from "../icons"
+import { TypingText } from "../typingText"
 
 export type ProjectLink = {
 	href: string
@@ -26,14 +20,9 @@ export type ProjectType = {
 	visualContent: ReactNode
 }
 
-const Dates = ({
-	createdAt,
-	lastUpdatedAt,
-}: { createdAt: string; lastUpdatedAt: string }) => {
+const Dates = ({ createdAt, lastUpdatedAt }: { createdAt: string; lastUpdatedAt: string }) => {
 	const createdAtHandlers = useAnimationList(`project title ${createdAt}`)
-	const lastUpdatedAtHandler = useAnimationList(
-		`project title ${lastUpdatedAt}`,
-	)
+	const lastUpdatedAtHandler = useAnimationList(`project title ${lastUpdatedAt}`)
 
 	useEffect(() => {
 		createdAtHandlers.addSelfToAnimationList()
@@ -63,8 +52,9 @@ const Dates = ({
 }
 
 const Title = ({ title }: { title: string }) => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
-		useAnimationList(`project title ${title}`)
+	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } = useAnimationList(
+		`project title ${title}`,
+	)
 
 	useEffect(() => {
 		addSelfToAnimationList()
@@ -133,11 +123,7 @@ const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
 
 				return (
 					// TODO make this accessible
-					<a
-						key={href}
-						href={href}
-						className={cn(visibleIcons > index ? "visible" : "hidden")}
-					>
+					<a key={href} href={href} className={cn(visibleIcons > index ? "visible" : "hidden")}>
 						{icon}
 					</a>
 				)
@@ -147,8 +133,9 @@ const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
 }
 
 const Body = ({ body }: { body: string }) => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
-		useAnimationList(`project title ${body}`)
+	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } = useAnimationList(
+		`project title ${body}`,
+	)
 
 	useEffect(() => {
 		addSelfToAnimationList()
@@ -166,10 +153,7 @@ const Body = ({ body }: { body: string }) => {
 	)
 }
 
-const VisualContent = ({
-	visualContent,
-	title,
-}: { visualContent: ReactNode; title: string }) => {
+const VisualContent = ({ visualContent, title }: { visualContent: ReactNode; title: string }) => {
 	return (
 		<div className={"w-full md:w-1/2 flex-1 flex justify-end"}>
 			<DragItIn id={`project title image ${title}`}>{visualContent}</DragItIn>

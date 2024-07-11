@@ -32,11 +32,7 @@ export const SlideshowIndicator = ({
 	return (
 		<div className="flex w-fit h-4 sm:h-6 self-center">
 			{slides.map((_, i) =>
-				i + 1 === currentSlide ? (
-					<CurrentSlideIcon key={i} />
-				) : (
-					<SlideIcon key={i} />
-				),
+				i + 1 === currentSlide ? <CurrentSlideIcon key={i} /> : <SlideIcon key={i} />,
 			)}
 		</div>
 	)

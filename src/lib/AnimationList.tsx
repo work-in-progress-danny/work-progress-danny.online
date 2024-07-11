@@ -19,14 +19,9 @@ type UseAnimationListType = {
 	onFinish: () => void
 }
 
-type AnimationListType = Record<
-	string,
-	{ isAnimating: boolean; isFinished: boolean }
->
+type AnimationListType = Record<string, { isAnimating: boolean; isFinished: boolean }>
 
-const AnimationList = createContext<AnimationListContextType | undefined>(
-	undefined,
-)
+const AnimationList = createContext<AnimationListContextType | undefined>(undefined)
 
 export const AnimationListProvider: React.FC<{
 	children: ReactNode
@@ -61,9 +56,7 @@ export const AnimationListProvider: React.FC<{
 	}
 
 	return (
-		<AnimationList.Provider
-			value={{ addSelfToAnimationList, onFinish, isAnimating, isFinished }}
-		>
+		<AnimationList.Provider value={{ addSelfToAnimationList, onFinish, isAnimating, isFinished }}>
 			{children}
 		</AnimationList.Provider>
 	)
@@ -73,9 +66,7 @@ export const useAnimationList = (id: string): UseAnimationListType => {
 	const context = useContext(AnimationList)
 
 	if (!context) {
-		throw new Error(
-			"useAnimationContext must be used within an AnimationProvider",
-		)
+		throw new Error("useAnimationContext must be used within an AnimationProvider")
 	}
 	const { isFinished, isAnimating, addSelfToAnimationList, onFinish } = context
 

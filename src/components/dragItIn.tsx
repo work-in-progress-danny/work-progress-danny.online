@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react"
 import type { ReactNode } from "react"
+import { ClosedHandIcon, OpenHandIcon } from "../components/icons"
 import { useAnimationList } from "../lib/AnimationList"
 import { cn } from "../lib/utils"
-import { ClosedHandIcon, OpenHandIcon } from "../components/icons"
 
-export const DragItIn = ({
-	id,
-	children,
-}: { id: string; children: ReactNode }) => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
-		useAnimationList(id)
+export const DragItIn = ({ id, children }: { id: string; children: ReactNode }) => {
+	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } = useAnimationList(id)
 
 	const [cursorType, setCursorType] = useState<"grabbing" | "open">("grabbing")
 

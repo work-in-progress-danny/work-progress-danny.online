@@ -1,7 +1,7 @@
+import { AnimationListProvider } from "./lib/AnimationList"
+import { Footer } from "./sections/Footer"
 import { InProgress } from "./sections/InProgress"
 import { Intro } from "./sections/Intro"
-import { Footer } from "./sections/Footer"
-import { AnimationListProvider } from "./lib/AnimationList"
 
 const App = () => {
 	return (

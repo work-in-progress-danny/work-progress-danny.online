@@ -1,7 +1,7 @@
-import { TypingText } from "../components/typingText"
-import { Projects } from "../components/projects"
-import { useAnimationList } from "../lib/AnimationList"
 import { useEffect } from "react"
+import { Projects } from "../components/projects"
+import { TypingText } from "../components/typingText"
+import { useAnimationList } from "../lib/AnimationList"
 
 const Title = () => {
 	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =

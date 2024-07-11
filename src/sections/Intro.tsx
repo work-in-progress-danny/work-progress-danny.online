@@ -1,9 +1,9 @@
 import { useEffect } from "react"
+import { DragItIn } from "../components/dragItIn"
+import { Socials } from "../components/socials"
 import { TypingText } from "../components/typingText"
 import { useAnimationList } from "../lib/AnimationList"
 import { cn } from "../lib/utils"
-import { Socials } from "../components/socials"
-import { DragItIn } from "../components/dragItIn"
 
 const Heading = () => {
 	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
@@ -55,11 +55,7 @@ const Portrait = () => {
 
 export const Intro = () => {
 	return (
-		<div
-			className={cn(
-				"w-full flex flex-col gap-5 md:gap-0 md:flex-row justify-between",
-			)}
-		>
+		<div className={cn("w-full flex flex-col gap-5 md:gap-0 md:flex-row justify-between")}>
 			<div className="flex flex-col gap-5 md:gap-0 justify-between">
 				<Heading />
 				<IntroText />

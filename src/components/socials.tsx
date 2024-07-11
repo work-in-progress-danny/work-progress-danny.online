@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
-import { GitHubIcon, SpotifyIcon, SubstackIcon, XIcon } from "./icons"
 import { useAnimationList } from "../lib/AnimationList"
 import { cn } from "../lib/utils"
+import { GitHubIcon, SpotifyIcon, SubstackIcon, XIcon } from "./icons"
 
 export const Socials = () => {
-	const { addSelfToAnimationList, onFinish, isAnimating } =
-		useAnimationList("intro socials")
+	const { addSelfToAnimationList, onFinish, isAnimating } = useAnimationList("intro socials")
 	const [visibleIcons, setVisibleIcons] = useState(0)
 
 	useEffect(() => {
@@ -34,10 +33,7 @@ export const Socials = () => {
 				<GitHubIcon />
 			</a>
 
-			<a
-				className={cn(visibleIcons > 1 ? "visible" : "hidden")}
-				href="https://x.com/w_i_p_danny"
-			>
+			<a className={cn(visibleIcons > 1 ? "visible" : "hidden")} href="https://x.com/w_i_p_danny">
 				<XIcon />
 			</a>
 

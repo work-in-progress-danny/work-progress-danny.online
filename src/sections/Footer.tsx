@@ -3,8 +3,7 @@ import { TypingText } from "../components/typingText"
 import { useAnimationList } from "../lib/AnimationList"
 
 export const Footer = () => {
-	const { addSelfToAnimationList, isFinished, isAnimating, onFinish } =
-		useAnimationList("footer")
+	const { addSelfToAnimationList, isFinished, isAnimating, onFinish } = useAnimationList("footer")
 
 	useEffect(() => {
 		addSelfToAnimationList()

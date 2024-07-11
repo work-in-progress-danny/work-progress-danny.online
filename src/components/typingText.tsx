@@ -2,10 +2,7 @@ import { useEffect, useState } from "react"
 import { cn } from "../lib/utils"
 
 const Cursor = ({ blink }: { blink?: boolean }) => (
-	<span
-		style={{ fontFamily: "default" }}
-		className={cn(blink && "animate-blink", "font-normal")}
-	>
+	<span style={{ fontFamily: "default" }} className={cn(blink && "animate-blink", "font-normal")}>
 		{" |"}
 	</span>
 )
