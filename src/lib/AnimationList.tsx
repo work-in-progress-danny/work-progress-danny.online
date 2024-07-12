@@ -13,8 +13,8 @@ type AnimationListContextType = {
 	onFinish: (id: string) => void
 }
 type UseAnimationListType = {
-	isAnimating: () => boolean
-	isFinished: () => boolean
+	getIsAnimating: () => boolean
+	getIsFinished: () => boolean
 	addSelfToAnimationList: () => void
 	onFinish: () => void
 }
@@ -72,8 +72,8 @@ export const useAnimationList = (id: string): UseAnimationListType => {
 
 	return {
 		onFinish: () => onFinish(id),
-		isFinished: () => isFinished(id),
-		isAnimating: () => isAnimating(id),
+		getIsFinished: () => isFinished(id),
+		getIsAnimating: () => isAnimating(id),
 		addSelfToAnimationList: () => addSelfToAnimationList(id),
 	}
 }

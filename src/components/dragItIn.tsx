@@ -5,7 +5,9 @@ import { useAnimationList } from "../lib/AnimationList"
 import { cn } from "../lib/utils"
 
 export const DragItIn = ({ id, children }: { id: string; children: ReactNode }) => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } = useAnimationList(id)
+	const { addSelfToAnimationList, onFinish, getIsAnimating, getIsFinished } = useAnimationList(id)
+	const isFinished = getIsFinished()
+	const isAnimating = getIsAnimating()
 
 	const [cursorType, setCursorType] = useState<"grabbing" | "open">("grabbing")
 
@@ -14,7 +16,7 @@ export const DragItIn = ({ id, children }: { id: string; children: ReactNode }) 
 	}, [addSelfToAnimationList])
 
 	useEffect(() => {
-		if (!isAnimating()) return
+		if (!isAnimating) return
 		setTimeout(() => {
 			setCursorType("open")
 		}, 1500)
@@ -26,12 +28,12 @@ export const DragItIn = ({ id, children }: { id: string; children: ReactNode }) 
 	return (
 		<div
 			className={cn(
-				!isFinished() && !isAnimating() && "hidden",
-				isAnimating() && "animate-dragIn",
+				!isFinished && !isAnimating && "hidden",
+				isAnimating && "animate-dragIn",
 				"relative",
 			)}
 		>
-			{isAnimating() && (
+			{isAnimating && (
 				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-24">
 					{cursorType === "grabbing" ? <ClosedHandIcon /> : <OpenHandIcon />}
 				</div>

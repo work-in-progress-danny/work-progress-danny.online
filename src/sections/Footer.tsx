@@ -3,7 +3,10 @@ import { TypingText } from "../components/typingText"
 import { useAnimationList } from "../lib/AnimationList"
 
 export const Footer = () => {
-	const { addSelfToAnimationList, isFinished, isAnimating, onFinish } = useAnimationList("footer")
+	const { addSelfToAnimationList, getIsFinished, getIsAnimating, onFinish } =
+		useAnimationList("footer")
+	const isFinished = getIsFinished()
+	const isAnimating = getIsAnimating()
 
 	useEffect(() => {
 		addSelfToAnimationList()
@@ -12,10 +15,10 @@ export const Footer = () => {
 	return (
 		<p className="body">
 			<TypingText
-				isFinished={isFinished()}
+				isFinished={isFinished}
 				text={"Change is the only constant"}
 				onFinish={() => onFinish()}
-				startTyping={isAnimating()}
+				startTyping={isAnimating}
 			/>
 		</p>
 	)

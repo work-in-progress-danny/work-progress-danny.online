@@ -4,8 +4,10 @@ import { TypingText } from "../components/typingText"
 import { useAnimationList } from "../lib/AnimationList"
 
 const Title = () => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } =
+	const { addSelfToAnimationList, onFinish, getIsAnimating, getIsFinished } =
 		useAnimationList("in progress title")
+	const isFinished = getIsFinished()
+	const isAnimating = getIsAnimating()
 
 	useEffect(() => {
 		addSelfToAnimationList()
@@ -16,8 +18,8 @@ const Title = () => {
 			<TypingText
 				text="IN PROGRESS..."
 				onFinish={onFinish}
-				isFinished={isFinished()}
-				startTyping={isAnimating()}
+				isFinished={isFinished}
+				startTyping={isAnimating}
 			/>
 		</h2>
 	)

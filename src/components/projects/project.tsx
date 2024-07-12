@@ -33,18 +33,18 @@ const Dates = ({ createdAt, lastUpdatedAt }: { createdAt: string; lastUpdatedAt:
 		<div>
 			<p className="body">
 				<TypingText
-					isFinished={createdAtHandlers.isFinished()}
+					isFinished={createdAtHandlers.getIsFinished()}
 					text={`Created: ${createdAt}`}
 					onFinish={() => createdAtHandlers.onFinish()}
-					startTyping={createdAtHandlers.isAnimating()}
+					startTyping={createdAtHandlers.getIsAnimating()}
 				/>
 			</p>
 			<p className="body">
 				<TypingText
-					isFinished={lastUpdatedAtHandler.isFinished()}
+					isFinished={lastUpdatedAtHandler.getIsFinished()}
 					text={`Last Updated: ${lastUpdatedAt}`}
 					onFinish={() => lastUpdatedAtHandler.onFinish()}
-					startTyping={lastUpdatedAtHandler.isAnimating()}
+					startTyping={lastUpdatedAtHandler.getIsAnimating()}
 				/>
 			</p>
 		</div>
@@ -52,9 +52,12 @@ const Dates = ({ createdAt, lastUpdatedAt }: { createdAt: string; lastUpdatedAt:
 }
 
 const Title = ({ title }: { title: string }) => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } = useAnimationList(
-		`project title ${title}`,
-	)
+	const {
+		addSelfToAnimationList,
+		onFinish,
+		getIsAnimating: isAnimating,
+		getIsFinished: isFinished,
+	} = useAnimationList(`project title ${title}`)
 
 	useEffect(() => {
 		addSelfToAnimationList()
@@ -73,9 +76,11 @@ const Title = ({ title }: { title: string }) => {
 }
 
 const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
-	const { addSelfToAnimationList, onFinish, isAnimating } = useAnimationList(
-		`project links ${links[0].href}`,
-	)
+	const {
+		addSelfToAnimationList,
+		onFinish,
+		getIsAnimating: isAnimating,
+	} = useAnimationList(`project links ${links[0].href}`)
 
 	const [visibleIcons, setVisibleIcons] = useState(0)
 
@@ -133,9 +138,12 @@ const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
 }
 
 const Body = ({ body }: { body: string }) => {
-	const { addSelfToAnimationList, onFinish, isAnimating, isFinished } = useAnimationList(
-		`project title ${body}`,
-	)
+	const {
+		addSelfToAnimationList,
+		onFinish,
+		getIsAnimating: isAnimating,
+		getIsFinished: isFinished,
+	} = useAnimationList(`project title ${body}`)
 
 	useEffect(() => {
 		addSelfToAnimationList()

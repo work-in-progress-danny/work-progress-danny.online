@@ -4,15 +4,16 @@ import { cn } from "../lib/utils"
 import { GitHubIcon, SpotifyIcon, SubstackIcon, XIcon } from "./icons"
 
 export const Socials = () => {
-	const { addSelfToAnimationList, onFinish, isAnimating } = useAnimationList("intro socials")
+	const { addSelfToAnimationList, onFinish, getIsAnimating } = useAnimationList("intro socials")
 	const [visibleIcons, setVisibleIcons] = useState(0)
+	const isAnimating = getIsAnimating()
 
 	useEffect(() => {
 		addSelfToAnimationList()
 	}, [addSelfToAnimationList])
 
 	useEffect(() => {
-		if (!isAnimating()) return
+		if (!isAnimating) return
 		const interval = setInterval(() => {
 			setVisibleIcons(visibleIcons + 1)
 		}, 500)
