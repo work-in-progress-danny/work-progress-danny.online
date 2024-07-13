@@ -9,7 +9,7 @@ const SampleImage = () => (
 	/>
 )
 
-const projects: ProjectType[] = [
+const webProjects: ProjectType[] = [
 	{
 		title: "CaitlinGrantPhotography.com",
 		description:
@@ -51,6 +51,29 @@ const projects: ProjectType[] = [
 		],
 	},
 	{
+		title: "Essay",
+		description:
+			"this is a project in which I'm trying to build an app to help me write essays better",
+		createdAt: "Feb 25, 2023",
+		lastUpdatedAt: "Apr 3, 2024",
+		visualContent: <SampleImage />,
+		links: [
+			{
+				href: "asd", // TODO add link
+				text: "",
+				icon: "link",
+			},
+			{
+				href: "asaksjdlkdj", // TODO add link
+				text: "",
+				icon: "github",
+			},
+		],
+	},
+]
+
+const industrialDesignProjects: ProjectType[] = [
+	{
 		title: "Magic Corne",
 		description: `This was a great little project and was my first “major” project with my Bambu Lab P1s printer.
       I used to is use a honey bucket to keep all the things I like to use at my desk. Pliers, tweezers, scissors, screwdrivers, paperclips, pencils, pens. 
@@ -82,32 +105,15 @@ const projects: ProjectType[] = [
 			},
 		],
 	},
-	{
-		title: "Essay",
-		description:
-			"this is a project in which I'm trying to build an app to help me write essays better",
-		createdAt: "Feb 25, 2023",
-		lastUpdatedAt: "Apr 3, 2024",
-		visualContent: <SampleImage />,
-		links: [
-			{
-				href: "asd", // TODO add link
-				text: "",
-				icon: "link",
-			},
-			{
-				href: "asaksjdlkdj", // TODO add link
-				text: "",
-				icon: "github",
-			},
-		],
-	},
 ]
 
-export const Projects = () => (
+const Projects = ({ projects }: { projects: ProjectType[] }) => (
 	<div className="flex flex-col gap-5 md:gap-56">
 		{projects.map((project) => (
 			<Project key={project.title} {...project} />
 		))}
 	</div>
 )
+
+export const WebProjects = () => <Projects projects={webProjects} />
+export const IndustrialDesignProjects = () => <Projects projects={industrialDesignProjects} />
