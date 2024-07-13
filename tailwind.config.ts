@@ -1,10 +1,7 @@
 //** this function generated the transformation keyframes necessary
 // for a bezier curve dragIn animation */
 //*/
-const generateRandomDragInMovement = (): Record<
-	string,
-	{ transform: string }
-> => {
+const generateRandomDragInMovement = (): Record<string, { transform: string }> => {
 	// keyframe 0 is the start and I want it to be 100% x away
 	// keyframe 1 is the first keyframe and the image should be 100 - 1^2.5
 	// keyframe 2
