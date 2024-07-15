@@ -2,7 +2,10 @@ import { useEffect, useState } from "react"
 import { cn } from "../lib/utils"
 
 const Cursor = ({ blink, withSpace }: { blink?: boolean; withSpace?: boolean }) => (
-	<span style={{ fontFamily: "default" }} className={cn(blink && "animate-blink", "font-normal")}>
+	<span
+		style={{ fontFamily: "default" }}
+		className={cn(blink && "animate-blink", "font-normal no-underline not-italic")}
+	>
 		{withSpace ? " |" : "|"}
 	</span>
 )
