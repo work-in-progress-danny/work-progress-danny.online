@@ -1,6 +1,13 @@
 import { Project } from "./project"
 import type { ProjectType } from "./project"
 
+export type ProjectIdType =
+	| "CaitlinGrantPhotography.com"
+	| "work-in-progress-danny.online"
+	| "Essay"
+	| "Magic Corne"
+	| "Thing Bucket"
+
 const SampleImage = () => (
 	<img
 		src="https://via.placeholder.com/400x300"
@@ -9,7 +16,7 @@ const SampleImage = () => (
 	/>
 )
 
-const webProjects: ProjectType[] = [
+export const webProjects: ProjectType[] = [
 	{
 		title: "CaitlinGrantPhotography.com",
 		description:
@@ -72,7 +79,7 @@ const webProjects: ProjectType[] = [
 	},
 ]
 
-const industrialDesignProjects: ProjectType[] = [
+export const industrialDesignProjects: ProjectType[] = [
 	{
 		title: "Magic Corne",
 		description: `This was a great little project and was my first “major” project with my Bambu Lab P1s printer.

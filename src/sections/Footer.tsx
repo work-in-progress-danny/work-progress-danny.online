@@ -1,16 +1,10 @@
-import { useEffect } from "react"
 import { TypingText } from "../components/typingText"
 import { useAnimationList } from "../lib/AnimationList"
 
 export const Footer = () => {
-	const { addSelfToAnimationList, getIsFinished, getIsAnimating, onFinish } =
-		useAnimationList("footer")
+	const { getIsFinished, getIsAnimating, onFinish } = useAnimationList("Footer")
 	const isFinished = getIsFinished()
 	const isAnimating = getIsAnimating()
-
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
 
 	return (
 		<p className="body">

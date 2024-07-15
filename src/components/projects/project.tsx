@@ -1,9 +1,23 @@
-import { type ReactNode, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+import type { ReactNode } from "react"
 import { useAnimationList } from "../../lib/AnimationList"
 import { cn } from "../../lib/utils"
 import { DragItIn } from "../dragItIn"
 import { BambuLabIcon, GitHubIcon, LinkIcon, SpotifyIcon, SubstackIcon } from "../icons"
 import { TypingText } from "../typingText"
+import type { ProjectIdType } from "."
+
+export type ProjectIdTypes =
+	| ProjectIdType
+	| ProjectLinkIdType
+	| ProjectDateIdType
+	| ProjectBodyIdType
+	| ProjectVisualContentIdType
+
+export type ProjectLinkIdType = `${ProjectIdType}-link-${string}`
+export type ProjectDateIdType = `${ProjectIdType}-date-${string}`
+export type ProjectBodyIdType = `${ProjectIdType}-body-${string}`
+export type ProjectVisualContentIdType = `${ProjectIdType}-visualContent-${string}`
 
 export type ProjectLink = {
 	href: string
@@ -12,7 +26,7 @@ export type ProjectLink = {
 }
 
 export type ProjectType = {
-	title: string
+	title: ProjectIdType
 	description: string
 	createdAt: string
 	lastUpdatedAt: string
@@ -20,14 +34,13 @@ export type ProjectType = {
 	visualContent: ReactNode
 }
 
-const Dates = ({ createdAt, lastUpdatedAt }: { createdAt: string; lastUpdatedAt: string }) => {
-	const createdAtHandlers = useAnimationList(`project title ${createdAt}`)
-	const lastUpdatedAtHandler = useAnimationList(`project title ${lastUpdatedAt}`)
-
-	useEffect(() => {
-		createdAtHandlers.addSelfToAnimationList()
-		lastUpdatedAtHandler.addSelfToAnimationList()
-	}, [lastUpdatedAtHandler, createdAtHandlers])
+const Dates = ({
+	createdAt,
+	lastUpdatedAt,
+	projectId,
+}: { createdAt: string; lastUpdatedAt: string; projectId: ProjectIdType }) => {
+	const createdAtHandlers = useAnimationList(`${projectId}-date-${createdAt}`)
+	const lastUpdatedAtHandler = useAnimationList(`${projectId}-date-${lastUpdatedAt}`)
 
 	return (
 		<div>
@@ -51,17 +64,12 @@ const Dates = ({ createdAt, lastUpdatedAt }: { createdAt: string; lastUpdatedAt:
 	)
 }
 
-const Title = ({ title }: { title: string }) => {
+const Title = ({ title }: { title: ProjectIdType }) => {
 	const {
-		addSelfToAnimationList,
 		onFinish,
 		getIsAnimating: isAnimating,
 		getIsFinished: isFinished,
-	} = useAnimationList(`project title ${title}`)
-
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
+	} = useAnimationList(title)
 
 	return (
 		<h3 className="title text-3xl underline w-full break-words">
@@ -75,18 +83,12 @@ const Title = ({ title }: { title: string }) => {
 	)
 }
 
-const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
-	const {
-		addSelfToAnimationList,
-		onFinish,
-		getIsAnimating: isAnimating,
-	} = useAnimationList(`project links ${links[0].href}`)
+const LinkGroup = ({ links, projectId }: { links: ProjectLink[]; projectId: ProjectIdType }) => {
+	const { onFinish, getIsAnimating: isAnimating } = useAnimationList(
+		`${projectId}-link-${links[0].href}`,
+	)
 
 	const [visibleIcons, setVisibleIcons] = useState(0)
-
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
 
 	useEffect(() => {
 		if (!isAnimating()) return
@@ -137,17 +139,12 @@ const LinkGroup = ({ links }: { links: ProjectLink[] }) => {
 	)
 }
 
-const Body = ({ body }: { body: string }) => {
+const Body = ({ body, projectId }: { body: string; projectId: ProjectIdType }) => {
 	const {
-		addSelfToAnimationList,
 		onFinish,
 		getIsAnimating: isAnimating,
 		getIsFinished: isFinished,
-	} = useAnimationList(`project title ${body}`)
-
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
+	} = useAnimationList(`${projectId}-body-${body}`)
 
 	return (
 		<p className="body">
@@ -161,10 +158,13 @@ const Body = ({ body }: { body: string }) => {
 	)
 }
 
-const VisualContent = ({ visualContent, title }: { visualContent: ReactNode; title: string }) => {
+const VisualContent = ({
+	visualContent,
+	title,
+}: { visualContent: ReactNode; title: ProjectIdType }) => {
 	return (
 		<div className={"w-full md:w-1/2 flex-1 flex justify-end"}>
-			<DragItIn id={`project title image ${title}`}>{visualContent}</DragItIn>
+			<DragItIn id={`${title}-visualContent-${title}`}>{visualContent}</DragItIn>
 		</div>
 	)
 }
@@ -182,10 +182,10 @@ export const Project = ({
 			<div className="flex flex-col gap-5 flex-1">
 				<div className="flex flex-col gap-2 justify-start items-start">
 					<Title title={title} />
-					<LinkGroup links={links} />
-					<Dates createdAt={createdAt} lastUpdatedAt={lastUpdatedAt} />
+					<LinkGroup links={links} projectId={title} />
+					<Dates createdAt={createdAt} lastUpdatedAt={lastUpdatedAt} projectId={title} />
 				</div>
-				<Body body={description} />
+				<Body body={description} projectId={title} />
 			</div>
 			<VisualContent visualContent={visualContent} title={title} />
 		</div>

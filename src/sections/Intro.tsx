@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { DragItIn } from "../components/dragItIn"
 import { GitHubIcon, SpotifyIcon, SubstackIcon, XIcon } from "../components/icons"
 import { useAnimationList } from "../lib/AnimationList"
@@ -48,14 +48,9 @@ const Socials = () => {
 }
 
 const Heading = () => {
-	const { addSelfToAnimationList, onFinish, getIsAnimating, getIsFinished } =
-		useAnimationList("intro header")
-	const isAnimating = getIsAnimating()
+	const { onFinish, getIsAnimating, getIsFinished } = useAnimationList("Intro header")
 	const isFinished = getIsFinished()
-
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
+	const isAnimating = getIsAnimating() ?? !isFinished
 
 	return (
 		<h1 className="title text-5xl self-center md:text-6xl">
@@ -77,8 +72,7 @@ const intros = [
 ]
 
 const IntroText = () => {
-	const { addSelfToAnimationList, onFinish, getIsAnimating, getIsFinished } =
-		useAnimationList("intro text")
+	const { onFinish, getIsAnimating, getIsFinished } = useAnimationList("Intro Text")
 	const [currentIntro, setCurrentIntro] = useState(0)
 	const isFinished = getIsFinished()
 	const isAnimating = getIsAnimating()
@@ -90,10 +84,6 @@ const IntroText = () => {
 		setCurrentIntro((prev) => (prev + 1 > intros.length - 1 ? 0 : prev + 1))
 	}
 
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
-
 	return (
 		<p className="body text-2xl">
 			<DynamicText text={intros[currentIntro]} onFinish={onIntroFinish} startTyping={isAnimating} />
@@ -103,21 +93,19 @@ const IntroText = () => {
 
 const Portrait = () => {
 	return (
-		<DragItIn id="intro Portrait">
+		<DragItIn id="Intro Portrait">
 			<img src="/danny.png" alt="placeholder" className="rounded-xl" />
 		</DragItIn>
 	)
 }
 
-export const Intro = () => {
-	return (
-		<div className={cn("w-full flex flex-col gap-5 md:gap-0 md:flex-row justify-between")}>
-			<div className="flex flex-col gap-5 md:gap-0 justify-between">
-				<Heading />
-				<IntroText />
-				<Socials />
-			</div>
-			<Portrait />
+export const Intro = () => (
+	<div className={cn("w-full flex flex-col gap-5 md:gap-0 md:flex-row justify-between")}>
+		<div className="flex flex-col gap-5 md:gap-0 justify-between">
+			<Heading />
+			<IntroText />
+			<Socials />
 		</div>
-	)
-}
+		<Portrait />
+	</div>
+)

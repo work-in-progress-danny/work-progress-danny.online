@@ -1,18 +1,12 @@
-import { useEffect } from "react"
 import { TypingText } from "../components/typingText"
 import { useAnimationList } from "../lib/AnimationList"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
 import { IndustrialDesignProjects, WebProjects } from "../components/projects"
 
 const Title = () => {
-	const { addSelfToAnimationList, onFinish, getIsAnimating, getIsFinished } =
-		useAnimationList("in progress title")
+	const { onFinish, getIsAnimating, getIsFinished } = useAnimationList("InProgress title")
 	const isFinished = getIsFinished()
 	const isAnimating = getIsAnimating()
-
-	useEffect(() => {
-		addSelfToAnimationList()
-	}, [addSelfToAnimationList])
 
 	return (
 		<h2 className="title text-5xl pb-2 md:pb-5">
@@ -26,22 +20,48 @@ const Title = () => {
 	)
 }
 
+const Project = () => {
+	const industrialDesignProjectsAnimation = useAnimationList(
+		"InProgress projects tab industrial design projects",
+	)
+
+	const webProjectsAnimation = useAnimationList("InProgress projects tab web projects")
+
+	return (
+		<Tabs defaultValue="web development" className="">
+			<TabsList>
+				<TabsTrigger value="web development">
+					<TypingText
+						text="Web Development & Design"
+						startTyping={webProjectsAnimation.getIsAnimating()}
+						onFinish={webProjectsAnimation.onFinish}
+						isFinished={webProjectsAnimation.getIsFinished()}
+					/>
+				</TabsTrigger>
+				<TabsTrigger value="industrial design">
+					<TypingText
+						text="3D Modeling & Product Design"
+						startTyping={industrialDesignProjectsAnimation.getIsAnimating()}
+						onFinish={industrialDesignProjectsAnimation.onFinish}
+						isFinished={industrialDesignProjectsAnimation.getIsFinished()}
+					/>
+				</TabsTrigger>
+			</TabsList>
+			<TabsContent value="web development">
+				<WebProjects />
+			</TabsContent>
+			<TabsContent value="industrial design">
+				<IndustrialDesignProjects />
+			</TabsContent>
+		</Tabs>
+	)
+}
+
 export const InProgress = () => {
 	return (
 		<div className="w-full flex flex-col">
 			<Title />
-			<Tabs defaultValue="web development" className="">
-				<TabsList>
-					<TabsTrigger value="web development">Web Development & Design</TabsTrigger>
-					<TabsTrigger value="industrial design">3D Modeling & Product Design</TabsTrigger>
-				</TabsList>
-				<TabsContent value="web development">
-					<WebProjects />
-				</TabsContent>
-				<TabsContent value="industrial design">
-					<IndustrialDesignProjects />
-				</TabsContent>
-			</Tabs>
+			<Project />
 		</div>
 	)
 }
