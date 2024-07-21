@@ -9,37 +9,25 @@ const Socials = () => {
 	return (
 		<div className="flex h-8 gap-8 md:h-10">
 			<DragItIn id="Intro Socials github">
-				<a
-					// className={cn(visibleIcons > 0 ? "visible" : "hidden")}
-					href="https://github.com/work-in-progress-danny/"
-				>
+				<a href="https://github.com/work-in-progress-danny/">
 					<GitHubIcon />
 				</a>
 			</DragItIn>
 
 			<DragItIn id="Intro Socials X">
-				<a
-					// className={cn(visibleIcons > 1 ? "visible" : "hidden")}
-					href="https://x.com/w_i_p_danny"
-				>
+				<a href="https://x.com/w_i_p_danny">
 					<XIcon />
 				</a>
 			</DragItIn>
 
 			<DragItIn id="Intro Socials substack">
-				<a
-					// className={cn(visibleIcons > 2 ? "visible" : "hidden")}
-					href="https://substack.com/w_i_p_danny"
-				>
+				<a href="https://substack.com/w_i_p_danny">
 					<SubstackIcon />
 				</a>
 			</DragItIn>
 
 			<DragItIn id="Intro Socials spotify">
-				<a
-					// className={cn(visibleIcons > 3 ? "visible" : "hidden")}
-					href="https://spotify.com/w_i_p_danny"
-				>
+				<a href="https://spotify.com/w_i_p_danny">
 					<SpotifyIcon />
 				</a>
 			</DragItIn>
@@ -94,14 +82,14 @@ const IntroText = () => {
 const Portrait = () => {
 	return (
 		<DragItIn id="Intro Portrait">
-			<img src="/danny.png" alt="placeholder" className="rounded-xl" />
+			<img src="/danny.png" alt="placeholder" className="rounded-xl h-screen" />
 		</DragItIn>
 	)
 }
 
 export const Intro = () => (
 	<div className={cn("w-full flex flex-col gap-5 md:gap-0 md:flex-row justify-between")}>
-		<div className="flex flex-col gap-5 md:gap-0 justify-between">
+		<div className="flex flex-col gap-5 ">
 			<Heading />
 			<IntroText />
 			<Socials />

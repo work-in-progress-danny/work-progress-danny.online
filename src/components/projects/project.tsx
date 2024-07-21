@@ -72,7 +72,7 @@ const Title = ({ title }: { title: ProjectIdType }) => {
 	} = useAnimationList(title)
 
 	return (
-		<h3 className="title text-3xl underline w-full break-words">
+		<h3 className="title text-3xl w-full break-words">
 			<TypingText
 				isFinished={isFinished()}
 				text={title}
@@ -84,14 +84,16 @@ const Title = ({ title }: { title: ProjectIdType }) => {
 }
 
 const LinkGroup = ({ links, projectId }: { links: ProjectLink[]; projectId: ProjectIdType }) => {
-	const { onFinish, getIsAnimating: isAnimating } = useAnimationList(
+	const { onFinish, getIsAnimating, getIsFinished } = useAnimationList(
 		`${projectId}-link-${links[0].href}`,
 	)
+	const isAnimating = getIsAnimating()
+	const isFinished = getIsFinished()
 
 	const [visibleIcons, setVisibleIcons] = useState(0)
 
 	useEffect(() => {
-		if (!isAnimating()) return
+		if (!isAnimating) return
 		const interval = setInterval(() => {
 			setVisibleIcons(visibleIcons + 1)
 		}, 500)
@@ -130,7 +132,11 @@ const LinkGroup = ({ links, projectId }: { links: ProjectLink[]; projectId: Proj
 
 				return (
 					// TODO make this accessible
-					<a key={href} href={href} className={cn(visibleIcons > index ? "visible" : "hidden")}>
+					<a
+						key={href}
+						href={href}
+						className={cn(visibleIcons > index || isFinished ? "visible" : "hidden")}
+					>
 						{icon}
 					</a>
 				)
@@ -147,7 +153,7 @@ const Body = ({ body, projectId }: { body: string; projectId: ProjectIdType }) =
 	} = useAnimationList(`${projectId}-body-${body}`)
 
 	return (
-		<p className="body">
+		<p className="body whitespace-pre-line">
 			<TypingText
 				isFinished={isFinished()}
 				text={body}

@@ -11,7 +11,7 @@ const Title = () => {
 	return (
 		<h2 className="title text-5xl pb-2 md:pb-5">
 			<TypingText
-				text="IN MOTION..."
+				text="PROJECTS"
 				onFinish={onFinish}
 				isFinished={isFinished}
 				startTyping={isAnimating}
