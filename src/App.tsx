@@ -7,7 +7,7 @@ const App = () => {
 	return (
 		<AnimationListProvider>
 			<div className="w-full flex justify-center">
-				<div className="p-1 flex flex-col gap-10 items-center md:gap-24 md:p-5 w-full max-w-[1920px]">
+				<div className="flex flex-col gap-5 items-center max-w-[1920px] md:gap-15 md:p-5 w-full ">
 					<Intro />
 					<InProgress />
 					<Footer />

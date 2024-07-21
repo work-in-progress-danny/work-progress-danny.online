@@ -41,7 +41,7 @@ const Heading = () => {
 	const isAnimating = getIsAnimating() ?? !isFinished
 
 	return (
-		<h1 className="title text-5xl self-center md:text-6xl">
+		<h1 className="title text-5xl self-center md:self-start md:text-6xl">
 			<TypingText
 				isFinished={isFinished}
 				text="WORK IN PROGRESS DANNY"
@@ -81,15 +81,17 @@ const IntroText = () => {
 
 const Portrait = () => {
 	return (
-		<DragItIn id="Intro Portrait">
-			<img src="/danny.png" alt="placeholder" className="rounded-xl h-screen" />
-		</DragItIn>
+		<div className="md:w-1/2">
+			<DragItIn id="Intro Portrait">
+				<img src="/danny.png" alt="placeholder" className="rounded-xl" />
+			</DragItIn>
+		</div>
 	)
 }
 
 export const Intro = () => (
-	<div className={cn("w-full flex flex-col gap-5 md:gap-0 md:flex-row justify-between")}>
-		<div className="flex flex-col gap-5 ">
+	<div className={"w-full flex flex-col gap-5 md:gap-0 md:flex-row"}>
+		<div className="flex flex-col gap-5 md:w-1/2">
 			<Heading />
 			<IntroText />
 			<Socials />
