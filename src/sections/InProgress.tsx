@@ -1,7 +1,7 @@
-import { TypingText } from "../components/typingText"
-import { useAnimationList } from "../lib/AnimationList"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
 import { IndustrialDesignProjects, WebProjects } from "../components/projects"
+import { TypingText } from "../components/typingText"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
+import { useAnimationList } from "../lib/AnimationList"
 
 const Title = () => {
 	const { onFinish, getIsAnimating, getIsFinished } = useAnimationList("InProgress title")
@@ -28,7 +28,7 @@ const Project = () => {
 	const webProjectsAnimation = useAnimationList("InProgress projects tab web projects")
 
 	return (
-		<Tabs defaultValue="web development" className="">
+		<Tabs defaultValue="web development">
 			<TabsList>
 				<TabsTrigger value="web development">
 					<TypingText

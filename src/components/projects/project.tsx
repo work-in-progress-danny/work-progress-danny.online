@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import type { ReactNode } from "react"
+import type { ProjectIdType } from "."
 import { useAnimationList } from "../../lib/AnimationList"
 import { cn } from "../../lib/utils"
 import { DragItIn } from "../dragItIn"
 import { BambuLabIcon, GitHubIcon, LinkIcon, SpotifyIcon, SubstackIcon } from "../icons"
 import { TypingText } from "../typingText"
-import type { ProjectIdType } from "."
 
 export type ProjectIdTypes =
 	| ProjectIdType

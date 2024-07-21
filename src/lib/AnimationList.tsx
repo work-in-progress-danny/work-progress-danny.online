@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from "react"
 import type { ReactNode } from "react"
+import type { ProjectIdType } from "../components/projects"
+import { industrialDesignProjects, webProjects } from "../components/projects"
 import type {
 	ProjectBodyIdType,
 	ProjectDateIdType,
@@ -8,7 +10,6 @@ import type {
 	ProjectType,
 	ProjectVisualContentIdType,
 } from "../components/projects/project"
-import { industrialDesignProjects, ProjectIdType, webProjects } from "../components/projects"
 
 export type AnimatingElementHandlersType = {
 	isAnimating: boolean

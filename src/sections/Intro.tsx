@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { DragItIn } from "../components/dragItIn"
 import { GitHubIcon, SpotifyIcon, SubstackIcon, XIcon } from "../components/icons"
-import { useAnimationList } from "../lib/AnimationList"
 import { DynamicText, TypingText } from "../components/typingText"
+import { useAnimationList } from "../lib/AnimationList"
 import { cn } from "../lib/utils"
 
 const Socials = () => {
