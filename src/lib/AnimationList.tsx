@@ -27,7 +27,7 @@ type AnimationRefTableType = Record<AnimationIdType, { isAnimating: boolean; isF
 const AnimationList = createContext<AnimationListContextType | undefined>(undefined)
 
 export type AnimationIdType =
-	| "Intro header"
+	| "Intro Header"
 	| "Intro Text"
 	| "Intro Socials github"
 	| "Intro Socials X"
@@ -70,12 +70,13 @@ const getProjectAnimationIds = (projects: ProjectType[]): ProjectIdTypes[] => {
 }
 
 const animationOrderList: AnimationIdType[] = [
-	"Intro header",
+	"Intro Header",
+	"Intro Text",
+	"Intro Portrait",
 	"Intro Socials github",
 	"Intro Socials X",
 	"Intro Socials substack",
 	"Intro Socials spotify",
-	"Intro Portrait",
 	"InProgress title",
 	"InProgress projects tab web projects",
 	"InProgress projects tab industrial design projects",
@@ -88,7 +89,7 @@ const animationOrderList: AnimationIdType[] = [
 const getInitialAnimationRefTable = (): AnimationRefTableType =>
 	animationOrderList.reduce((acc, id) => {
 		acc[id] = {
-			isAnimating: id === "Intro header", // intro header is the first animation and needs to start it all off
+			isAnimating: id === "Intro Header", // intro header is the first animation and needs to start it all off
 			isFinished: false,
 		}
 		return acc

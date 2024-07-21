@@ -35,7 +35,7 @@ const Socials = () => {
 }
 
 const Heading = () => {
-	const { onFinish, getIsAnimating, getIsFinished } = useAnimationList("Intro header")
+	const { onFinish, getIsAnimating, getIsFinished } = useAnimationList("Intro Header")
 	const isFinished = getIsFinished()
 	const isAnimating = getIsAnimating() ?? !isFinished
 
