@@ -118,7 +118,7 @@ const LinkGroup = ({ links, projectId }: { links: ProjectLink[]; projectId: Proj
 						icon = <BambuLabIcon />
 						break
 					case "link":
-						icon = <LinkIcon />
+						icon = <LinkIcon tooltipContent={href} />
 						break
 					case "substack":
 						icon = <SubstackIcon />
